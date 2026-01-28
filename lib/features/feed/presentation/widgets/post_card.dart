@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:freelamusic/core/theme/app_theme.dart';
+import 'package:freelamusic/features/feed/data/models/post_model.dart';
 import '../../../../core/widgets/app_card.dart';
 import '../../../../core/widgets/app_button.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key});
+  final PostModel post;
+
+  const PostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return AppCard(
-      // Usando a margem que adicionamos no AppCard
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,17 +21,17 @@ class PostCard extends StatelessWidget {
           // Cabeçalho
           Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 22,
-                backgroundImage: AssetImage('images/avatar.jpg'),
+                backgroundImage: AssetImage(post.userAvatar),
               ),
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('João Silva', style: theme.textTheme.titleMedium),
+                  Text(post.userName, style: theme.textTheme.titleMedium),
                   Text(
-                    'Guitarrista • São Paulo',
+                    post.userRole,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: Colors.grey,
                     ),
@@ -44,43 +46,38 @@ class PostCard extends StatelessWidget {
           const SizedBox(height: 12),
 
           // Conteúdo do Texto
-          Text(
-            'Disponível para shows neste final de semana! 🎸🎶 Entre em contato!',
-            style: theme.textTheme.bodyMedium,
-          ),
+          Text(post.content, style: theme.textTheme.bodyMedium),
 
-          const SizedBox(height: 12),
-
-          // Imagem do Post
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'images/post_sample.jpg',
-              fit: BoxFit.cover,
-              height: 200,
-              width: double.infinity,
+          if (post.imageUrl != null) ...[
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                post.imageUrl!,
+                fit: BoxFit.cover,
+                height: 200,
+                width: double.infinity,
+              ),
             ),
-          ),
+          ],
 
           const SizedBox(height: 16),
 
-          // Ações (Like, Comment e o Botão AppButton)
+          // Ações
           Row(
             children: [
               _ActionButton(
                 icon: Icons.favorite_border,
-                label: 'Curtir',
+                label: post.likes.toString(),
                 onTap: () {},
               ),
               const SizedBox(width: 12),
               _ActionButton(
                 icon: Icons.comment_outlined,
-                label: 'Comentar',
+                label: post.comments.toString(),
                 onTap: () {},
               ),
               const Spacer(),
-
-              // Seu componente AppButton
               SizedBox(
                 width: 110,
                 height: 36,
@@ -98,7 +95,6 @@ class PostCard extends StatelessWidget {
   }
 }
 
-// ESTE É O WIDGET QUE ESTAVA FALTANDO NO SEU ARQUIVO:
 class _ActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -121,7 +117,7 @@ class _ActionButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: AppTheme.primary), // ← Mudança aqui
+            Icon(icon, size: 20, color: AppTheme.primary),
             const SizedBox(width: 4),
             Text(
               label,
