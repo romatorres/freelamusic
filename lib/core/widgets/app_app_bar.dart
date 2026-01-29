@@ -20,7 +20,6 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ESTA É A LINHA QUE ESTAVA FALTANDO:
     final theme = Theme.of(context);
 
     return AppBar(
