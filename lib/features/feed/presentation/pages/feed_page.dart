@@ -27,7 +27,7 @@ class _FeedPageState extends State<FeedPage> {
       appBar: const AppAppBar(
         title: 'Feed',
         showBack: false,
-        userAvatar: 'images/avatar.jpg',
+        userAvatar: 'images/avatar1.jpg',
       ),
       body: FutureBuilder<List<PostModel>>(
         future: _postsFuture,

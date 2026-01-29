@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const Color primary = Color(0xFF6E56CF);
+  static const Color secondary = Color(0xFFC2CAE8);
   static const Color backgroundLight = Color(0xFFF4F9FE);
-  static const Color backgroundDark = Color(0xFF161514);
-  static const Color textDark = Color(0xFF161514);
+  static const Color backgroundDark = Color(0xFF1C1C33);
+  static const Color textDark = Color(0xFF1C1C33);
   static const Color textLight = Color(0xFFF4F9FE);
 
   static ThemeData lightTheme = ThemeData(
@@ -20,8 +21,8 @@ class AppTheme {
 
     // APPBAR
     appBarTheme: AppBarTheme(
-      backgroundColor: primary, // Cor primária no background
-      foregroundColor: Colors.white, // Texto branco para contraste
+      backgroundColor: secondary,
+      foregroundColor: textDark,
       elevation: 0,
       scrolledUnderElevation: 4,
       surfaceTintColor: Colors.white.withValues(alpha: 0.1),

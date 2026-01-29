@@ -6,7 +6,6 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBack;
   final String? userAvatar;
   final VoidCallback? onAvatarTap;
-  final double logoHeight;
   final double logoWidth;
 
   const AppAppBar({
@@ -16,16 +15,16 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBack = true,
     this.userAvatar,
     this.onAvatarTap,
-    this.logoHeight = 38,
-    this.logoWidth = 70,
+    this.logoWidth = 76,
   });
 
   @override
   Widget build(BuildContext context) {
+    // ESTA É A LINHA QUE ESTAVA FALTANDO:
+    final theme = Theme.of(context);
+
     return AppBar(
       automaticallyImplyLeading: false,
-
-      // CONTROLA A LARGURA DO LEADING
       leadingWidth: showBack ? 56 : logoWidth,
       leading: showBack
           ? IconButton(
@@ -34,34 +33,46 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : Padding(
               padding: const EdgeInsets.only(left: 12),
-              child: Image.asset(
-                'images/logo_app.png',
-                height: logoHeight,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset('images/logo_app.png', fit: BoxFit.contain),
             ),
 
-      // TÍTULO CENTRALIZADO
-      title: Text(title),
+      title: Text(
+        title,
+        style: theme.textTheme.titleLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       centerTitle: true,
 
-      // AVATAR À DIREITA
       actions: [
         if (actions != null) ...actions!,
 
-        if (userAvatar != null)
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: GestureDetector(
-              onTap: onAvatarTap,
-              child: CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage(userAvatar!),
-              ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: GestureDetector(
+            onTap: onAvatarTap,
+            child: CircleAvatar(
+              radius: 18,
+              child: (userAvatar != null && userAvatar!.isNotEmpty)
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.asset(
+                        userAvatar!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Icon(
+                          Icons.person,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    )
+                  : Icon(
+                      Icons.person,
+                      color: theme.colorScheme.primary,
+                      size: 22,
+                    ),
             ),
-          )
-        else
-          const SizedBox(width: 56),
+          ),
+        ),
       ],
     );
   }
