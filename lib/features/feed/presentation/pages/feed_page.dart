@@ -24,7 +24,11 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppAppBar(title: 'Feed', showBack: false),
+      appBar: const AppAppBar(
+        title: 'Feed',
+        showBack: false,
+        userAvatar: 'images/avatar.jpg',
+      ),
       body: FutureBuilder<List<PostModel>>(
         future: _postsFuture,
         builder: (context, snapshot) {
