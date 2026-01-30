@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_controller.dart';
-import 'features/home/presentation/pages/home_page.dart';
+import 'features/splash/splash_screen.dart';
 
 class FreelaMusicApp extends StatelessWidget {
   const FreelaMusicApp({super.key});
@@ -17,7 +17,7 @@ class FreelaMusicApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeMode,
-          home: const HomePage(),
+          home: const ProfessionalSplashScreen(),
         );
       },
     );
