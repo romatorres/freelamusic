@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const Color primary = Color(0xFF6E56CF);
-  static const Color secondary = Color(0xFFC2CAE8);
+  static const Color secondary = Color(0xFFD1D5E7);
   static const Color backgroundLight = Color(0xFFF4F9FE);
   static const Color backgroundDark = Color(0xFF1C1C33);
   static const Color textDark = Color(0xFF1C1C33);
@@ -55,9 +55,11 @@ class AppTheme {
     ),
 
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: backgroundLight,
-      selectedItemColor: primary,
+      backgroundColor: secondary,
+      selectedItemColor: backgroundDark,
       unselectedItemColor: Colors.grey,
+      selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontSize: 10),
     ),
   );
 
