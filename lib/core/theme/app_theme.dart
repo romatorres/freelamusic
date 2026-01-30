@@ -54,12 +54,33 @@ class AppTheme {
       ),
     ),
 
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    navigationBarTheme: NavigationBarThemeData(
+      height: 48,
       backgroundColor: secondary,
-      selectedItemColor: backgroundDark,
-      unselectedItemColor: Colors.grey,
-      selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontSize: 10),
+      indicatorColor: primary.withValues(alpha: 0.2),
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      indicatorShape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return const IconThemeData(color: primary, size: 22);
+        }
+        return const IconThemeData(
+          color: Color.fromARGB(255, 121, 107, 179),
+          size: 20,
+        );
+      }),
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: primary,
+          );
+        }
+        return const TextStyle(fontSize: 10, color: Colors.black54);
+      }),
     ),
   );
 

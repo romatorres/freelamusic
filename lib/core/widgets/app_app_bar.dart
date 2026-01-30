@@ -38,7 +38,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         style: theme.textTheme.titleLarge?.copyWith(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
+          fontSize: 20,
         ),
       ),
       centerTitle: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/app_app_bar.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({super.key});
@@ -8,7 +9,11 @@ class SchedulePage extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Teste")),
+      appBar: const AppAppBar(
+        title: 'Agenda',
+        showBack: false,
+        userAvatar: 'images/avatar.jpg',
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: theme.colorScheme.primary,
