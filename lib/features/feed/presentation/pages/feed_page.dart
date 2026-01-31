@@ -10,12 +10,7 @@ class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppAppBar(
-        title: 'Feed',
-        showBack: false,
-        userAvatar:
-            'assets/images/avatar.jpg', // Certifique-se que o path está correto
-      ),
+      appBar: const AppAppBar(title: 'Feed', showBack: false, userAvatar: ''),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 12),
         itemCount: initialPosts.length,

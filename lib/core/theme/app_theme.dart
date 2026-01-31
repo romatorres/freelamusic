@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primary = Color(0xFF6E56CF);
-  static const Color secondary = Color(0xFFD1D5E7);
-  static const Color backgroundLight = Color(0xFFF4F9FE);
+  static const Color primary = Color(0xFFFD9E02);
+  static const Color secondary = Color(0xFFFEE1B1);
+  static const Color backgroundLight = Color(0xFFF9F5EF);
   static const Color backgroundDark = Color(0xFF1C1C33);
+  static const Color bakgroundCard = Color(0xFFFFF5E6);
   static const Color textDark = Color(0xFF1C1C33);
-  static const Color textLight = Color(0xFFF4F9FE);
+  static const Color textLight = Color(0xFFFFF5E6);
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -21,9 +22,9 @@ class AppTheme {
 
     // APPBAR
     appBarTheme: AppBarTheme(
-      backgroundColor: secondary,
+      backgroundColor: backgroundLight,
       foregroundColor: textDark,
-      elevation: 0,
+      elevation: 2,
       scrolledUnderElevation: 4,
       surfaceTintColor: Colors.white.withValues(alpha: 0.1),
       centerTitle: true,
@@ -31,7 +32,7 @@ class AppTheme {
     ),
 
     cardTheme: CardThemeData(
-      color: Colors.white,
+      color: bakgroundCard,
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
@@ -49,14 +50,14 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primary,
-        foregroundColor: Colors.white,
+        foregroundColor: backgroundLight,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       ),
     ),
 
     navigationBarTheme: NavigationBarThemeData(
       height: 48,
-      backgroundColor: secondary,
+      backgroundColor: backgroundLight,
       indicatorColor: primary.withValues(alpha: 0.2),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       indicatorShape: RoundedRectangleBorder(
@@ -66,10 +67,7 @@ class AppTheme {
         if (states.contains(WidgetState.selected)) {
           return const IconThemeData(color: primary, size: 22);
         }
-        return const IconThemeData(
-          color: Color.fromARGB(255, 121, 107, 179),
-          size: 20,
-        );
+        return IconThemeData(color: primary.withValues(alpha: 0.6), size: 20);
       }),
       labelTextStyle: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
