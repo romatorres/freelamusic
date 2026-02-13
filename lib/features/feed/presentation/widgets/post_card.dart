@@ -117,7 +117,7 @@ class _ActionButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: AppTheme.primary),
+            Icon(icon, size: 20, color: AppTheme.primary(context)),
             const SizedBox(width: 4),
             Text(
               label,

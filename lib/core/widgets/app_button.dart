@@ -23,16 +23,16 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    Theme.of(context);
 
     Color getBackgroundColor() {
       if (backgroundColor != null) return backgroundColor!;
 
       switch (buttonStyle) {
         case AppButtonStyle.primary:
-          return AppTheme.primary;
+          return AppTheme.primary(context); // ✅ CORRIGIDO
         case AppButtonStyle.secondary:
-          return theme.colorScheme.secondary;
+          return AppTheme.secondary(context); // ✅ CORRIGIDO
         case AppButtonStyle.outline:
           return Colors.transparent;
         case AppButtonStyle.text:
@@ -43,19 +43,22 @@ class AppButton extends StatelessWidget {
     Color getForegroundColor() {
       switch (buttonStyle) {
         case AppButtonStyle.primary:
-          return Colors.white;
+          return AppTheme.primaryForeground(context); // ✅ CORRIGIDO
         case AppButtonStyle.secondary:
-          return Colors.white;
+          return AppTheme.secondaryForeground(context); // ✅ CORRIGIDO
         case AppButtonStyle.outline:
-          return AppTheme.primary;
+          return AppTheme.primary(context); // ✅ CORRIGIDO
         case AppButtonStyle.text:
-          return AppTheme.primary;
+          return AppTheme.primary(context); // ✅ CORRIGIDO
       }
     }
 
     BorderSide? getBorder() {
       if (buttonStyle == AppButtonStyle.outline) {
-        return BorderSide(color: AppTheme.primary, width: 2);
+        return BorderSide(
+          color: AppTheme.primary(context), // ✅ CORRIGIDO
+          width: 2,
+        );
       }
       return null;
     }
@@ -68,7 +71,9 @@ class AppButton extends StatelessWidget {
           Set<WidgetState> states,
         ) {
           if (states.contains(WidgetState.disabled)) {
-            return AppTheme.primary.withValues(alpha: 0.1);
+            return AppTheme.primary(
+              context,
+            ).withValues(alpha: 0.1); // ✅ CORRIGIDO
           }
           return getBackgroundColor();
         }),
@@ -108,11 +113,23 @@ class AppButton extends StatelessWidget {
 
         // Cor da sombra
         shadowColor: WidgetStateProperty.all(
-          AppTheme.primary.withValues(alpha: 0.4),
+          AppTheme.primary(context).withValues(alpha: 0.4), // ✅ CORRIGIDO
         ),
 
         // Borda (apenas para outline)
         side: WidgetStateProperty.all(getBorder()),
+
+        // Padding
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        ),
+
+        // Border radius
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppTheme.radiusMd),
+          ),
+        ),
       ),
       child: isLoading
           ? SizedBox(
@@ -124,6 +141,7 @@ class AppButton extends StatelessWidget {
               ),
             )
           : Row(
+              mainAxisSize: MainAxisSize.min, // ✅ MELHORADO
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (icon != null) ...[
@@ -134,7 +152,8 @@ class AppButton extends StatelessWidget {
                   label,
                   style: TextStyle(
                     color: getForegroundColor(),
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w500, // ✅ MELHORADO
+                    fontSize: 14,
                   ),
                 ),
               ],
