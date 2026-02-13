@@ -61,7 +61,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) => Icon(
                           Icons.person,
-                          color: theme.colorScheme.primary,
+                          color: theme.colorScheme.onSecondary,
                         ),
                       ),
                     )
